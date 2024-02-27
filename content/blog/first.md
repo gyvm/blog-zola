@@ -4,3 +4,11 @@ date = 2019-11-27
 +++
 
 This is my first blog post.
+
+{% mermaiddiagram() %}
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+{% end %}
