@@ -1,0 +1,15 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ get_url(path='main.css') | safe }}">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    <meta name="description" itemprop="about" content="{{ config.description }}">
+    {% if config.generate_feed %}
+    <link type="application/atom+xml" rel="alternate"
+    href="{{ get_url(path=config.feed_filename) | safe }}"
+    title="{{ config.title }}" />
+    {% endif %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap" />
+</head>
+
