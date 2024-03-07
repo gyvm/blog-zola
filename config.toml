@@ -18,3 +18,9 @@ build_search_index = true
 [markdown]
 highlight_code = true
 render_emoji = true
+
+[extra]
+links = [
+    { title = "GitHub", href = "https://github.com/gyvm" },
+    { title = "LinkedIn", href = "https://linkedin.com" }
+]
