@@ -1,6 +1,5 @@
 +++
 title = "List of blog posts"
+description = "Example blog page for Zola"
 sort_by = "date"
-template = "blog.html"
-page_template = "blog-page.html"
 +++
