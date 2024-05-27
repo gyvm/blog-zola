@@ -2,8 +2,9 @@ name: Terraform Plan
 
 on:
   pull_request:
-    paths:
-      - "terraform/**"
+    # このActionsが成功することを確認してからpathsの条件を有効化する
+    # paths:
+    #   - 'terraform/**.tf'
 
 env:
   TF_CLOUD_ORGANIZATION: "${{ secrets.TF_CLOUD_ORGANIZATION }}"

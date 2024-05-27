@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'terraform/**.tf'
+    # このActionsが成功することを確認してからpathsの条件を有効化する
+    # paths:
+    #   - 'terraform/**.tf'
 
 env:
   TF_CLOUD_ORGANIZATION: "YOUR-ORGANIZATION-HERE"
