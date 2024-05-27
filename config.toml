@@ -1,16 +1,40 @@
-# The URL the site will be built for
 base_url = "https://gyvm.github.io/blog-zola/"
+title = "gyvm's blog"
+description = "技術と趣味についてのブログ"
+default_language = "en"
+author = "yosuke mori"
 
-# Whether to automatically compile all Sass files in the sass directory
+theme = "boring"
+
 compile_sass = true
+minify_html = true
+generate_feed = true
+feed_filename = "atom.xml"
 
-# Whether to build a search index to be used later on by a JavaScript library
+taxonomies = [
+  { name = "tags", feed = true },
+]
+
 build_search_index = true
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
 highlight_code = true
+render_emoji = true
 
 [extra]
-# Put all your custom variables here
+links = [
+    { title = "GitHub", href = "https://github.com/gyvm" },
+    { title = "LinkedIn", href = "https://linkedin.com" }
+]
+
+homepage_title = "Hello, I am a boring guy!"
+homepage_subtitle = "I love to sit around all day, doing nothing."
+homepage_img_url = "/homepage-img.jpg"
+
+[[extra.social]]
+url = "https://github.com/ssiyad/boring"
+icon = "lab la-github"
+
+[[extra.social]]
+url = "https://github.com/ssiyad"
+icon = "lar la-user-circle"

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Allow: /
+Sitemap: https://gyvm.github.io/blog-zola/sitemap.xml
