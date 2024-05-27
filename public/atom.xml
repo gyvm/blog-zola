@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>gyvm&#x27;s blog</title>
+    <subtitle>技術と趣味についてのブログ</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://gyvm.github.io/blog-zola/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://gyvm.github.io/blog-zola/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2019-11-28T00:00:00+00:00</updated>
+    <id>https://gyvm.github.io/blog-zola/atom.xml</id>
+    <entry xml:lang="en">
+        <title>My second post</title>
+        <published>2019-11-28T00:00:00+00:00</published>
+        <updated>2019-11-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              yosuke mori
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://gyvm.github.io/blog-zola/blog/second/"/>
+        <id>https://gyvm.github.io/blog-zola/blog/second/</id>
+        
+        <content type="html" xml:base="https://gyvm.github.io/blog-zola/blog/second/">&lt;p&gt;This is my second blog post.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My first post</title>
+        <published>2019-11-27T00:00:00+00:00</published>
+        <updated>2019-11-27T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              yosuke mori
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://gyvm.github.io/blog-zola/blog/first/"/>
+        <id>https://gyvm.github.io/blog-zola/blog/first/</id>
+        
+        <content type="html" xml:base="https://gyvm.github.io/blog-zola/blog/first/">&lt;p&gt;This is my first blog post.&lt;&#x2F;p&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+    graph TD;
+    A--&amp;gt;B;
+    A--&amp;gt;C;
+    B--&amp;gt;D;
+    C--&amp;gt;D;
+&lt;&#x2F;div&gt;
+</content>
+        
+    </entry>
+</feed>

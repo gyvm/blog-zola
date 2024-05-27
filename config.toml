@@ -4,6 +4,8 @@ description = "技術と趣味についてのブログ"
 default_language = "en"
 author = "yosuke mori"
 
+theme = "boring"
+
 compile_sass = true
 minify_html = true
 generate_feed = true
@@ -24,3 +26,15 @@ links = [
     { title = "GitHub", href = "https://github.com/gyvm" },
     { title = "LinkedIn", href = "https://linkedin.com" }
 ]
+
+homepage_title = "Hello, I am a boring guy!"
+homepage_subtitle = "I love to sit around all day, doing nothing."
+homepage_img_url = "/homepage-img.jpg"
+
+[[extra.social]]
+url = "https://github.com/ssiyad/boring"
+icon = "lab la-github"
+
+[[extra.social]]
+url = "https://github.com/ssiyad"
+icon = "lar la-user-circle"
