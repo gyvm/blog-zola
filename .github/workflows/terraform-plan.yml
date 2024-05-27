@@ -17,7 +17,7 @@ jobs:
   terraform-cloud-speculative-run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.3.0
         id: upload
