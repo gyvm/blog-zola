@@ -13,7 +13,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-northeast-1."
+  region = "ap-northeast-1"
 }
 
 resource "aws_s3_bucket" "blog_zola_bucket" {
@@ -41,6 +41,10 @@ resource "aws_cloudfront_origin_access_control" "blog_zola_cf_oac" {
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
+}
+
+data "aws_cloudfront_cache_policy" "CachingDisabled" {
+  name = "Managed-CachingDisabled"
 }
 
 resource "aws_cloudfront_distribution" "blog_zola_distribution" {
