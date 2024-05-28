@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "blog_zola_bucket" {
-  bucket = "blog_zola_bucket"
+  bucket = "blog-zola-bucket"
 
   tags = {
     Environment = "production"
