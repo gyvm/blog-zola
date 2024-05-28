@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_cloudfront_origin_access_control" "blog_zola_cf_oac" {
-  name                              = "blog_zola_cf_oac"
+  name                              = "blog-zola-cf-oac"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -11,6 +11,15 @@ resource "aws_cloudfront_origin_access_control" "blog_zola_cf_oac" {
 
 data "aws_cloudfront_cache_policy" "CachingDisabled" {
   name = "Managed-CachingDisabled"
+}
+
+resource "aws_acm_certificate" "blog_cert" {
+  domain_name       = "blog.gyvm.xyz"
+  validation_method = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_cloudfront_distribution" "blog_zola_distribution" {
@@ -49,6 +58,7 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.blog_cert.arn
+    ssl_support_method = "sni-only"
   }
 }
