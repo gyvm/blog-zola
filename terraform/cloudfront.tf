@@ -13,16 +13,6 @@ data "aws_cloudfront_cache_policy" "CachingDisabled" {
   name = "Managed-CachingDisabled"
 }
 
-resource "aws_acm_certificate" "blog_cert" {
-  provider        = aws.virginia
-  domain_name       = "blog.gyvm.xyz"
-  validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
 resource "aws_cloudfront_distribution" "blog_zola_distribution" {
   origin {
     domain_name              = aws_s3_bucket.blog_zola_bucket.bucket_regional_domain_name
