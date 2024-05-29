@@ -14,23 +14,44 @@ resource "aws_s3_bucket_ownership_controls" "blog_zola_bucket_oc" {
   }
 }
 
-resource "aws_s3_bucket_policy" "blog_zola_bucket_policy" {
+resource "aws_s3_bucket_public_access_block" "blog_zola_bucket" {
   bucket = aws_s3_bucket.blog_zola_bucket.id
 
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Effect = "Allow",
-        Principal = "*",
-        Action = "s3:GetObject",
-        Resource = "${aws_s3_bucket.blog_zola_bucket.arn}/*",
-        Condition = {
-          StringEquals = {
-            "aws:UserAgent": "CloudFront"
-          }
-        }
-      }
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+data "aws_iam_policy_document" "blog_zola_bucket_policy" {
+  statement {
+    sid = "AllowCloudFrontServicePrincipal"
+
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+
+    actions = ["s3:GetObject"]
+
+    resources = [
+      "${aws_s3_bucket.blog_zola_bucket.arn}/*",
     ]
-  })
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+
+      values = [
+        aws_cloudfront_distribution.blog_zola_distribution.arn,
+      ]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "blog_zola_bucket" {
+  bucket = aws_s3_bucket.blog_zola_bucket.id
+  policy = data.aws_iam_policy_document.blog_zola_bucket_policy.json
+
+  depends_on = [aws_cloudfront_distribution.blog_zola_distribution]
 }
