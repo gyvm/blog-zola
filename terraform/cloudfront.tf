@@ -53,5 +53,5 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
     ssl_support_method = "sni-only"
   }
 
-  depends_on = [aws_acm_certificate.blog_cert]
+  depends_on = [aws_acm_certificate_validation.blog_cert_validation]
 }

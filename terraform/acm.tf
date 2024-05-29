@@ -21,9 +21,11 @@ resource "aws_acm_certificate" "blog_cert" {
 resource "aws_acm_certificate_validation" "gyvm_xyz" {
   certificate_arn         = aws_acm_certificate.gyvm_xyz.arn
   validation_record_fqdns = [for record in aws_route53_record.gyvm_xyz_validation : record.fqdn]
+  depends_on = [aws_acm_certificate.gyvm_xyz] 
 }
 
 resource "aws_acm_certificate_validation" "blog_cert_validation" {
   certificate_arn         = aws_acm_certificate.blog_cert.arn
   validation_record_fqdns = [tolist(aws_acm_certificate.blog_cert.domain_validation_options)[0].resource_record_name]
+  depends_on = [aws_acm_certificate.blog_cert] 
 }
