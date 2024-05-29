@@ -35,11 +35,13 @@ resource "aws_route53_record" "blog_validation" {
 }
 
 resource "aws_acm_certificate_validation" "gyvm" {
+  provider          = aws.virginia
   certificate_arn         = aws_acm_certificate.gyvm.arn
   validation_record_fqdns = [aws_route53_record.gyvm_validation.fqdn]
 }
 
 resource "aws_acm_certificate_validation" "blog" {
+  provider          = aws.virginia
   certificate_arn         = aws_acm_certificate.blog.arn
   validation_record_fqdns = [aws_route53_record.blog_validation.fqdn]
 }
