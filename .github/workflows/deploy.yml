@@ -3,9 +3,7 @@ name: Build and Deploy Zola site to S3
 on:
   push:
     branches:
-      # テストのためmain以外でもトリガーされるようにしておく
-      # - main
-      - '**'
+      - main
 
 jobs:
   build:
