@@ -33,6 +33,7 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
+    trusted_signers = ["self"]
   }
 
   price_class = "PriceClass_200"
