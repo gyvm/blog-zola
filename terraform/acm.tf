@@ -1,5 +1,5 @@
-resource "aws_acm_certificate" "gyvm_xyz" {
-  provider        = aws.virginia
+resource "aws_acm_certificate" "gyvm" {
+  provider          = aws.virginia
   domain_name       = "gyvm.xyz"
   validation_method = "DNS"
 
@@ -8,8 +8,8 @@ resource "aws_acm_certificate" "gyvm_xyz" {
   }
 }
 
-resource "aws_acm_certificate" "blog_cert" {
-  provider        = aws.virginia
+resource "aws_acm_certificate" "blog" {
+  provider          = aws.virginia
   domain_name       = "blog.gyvm.xyz"
   validation_method = "DNS"
 
@@ -18,14 +18,28 @@ resource "aws_acm_certificate" "blog_cert" {
   }
 }
 
-resource "aws_acm_certificate_validation" "gyvm_xyz" {
-  certificate_arn         = aws_acm_certificate.gyvm_xyz.arn
-  validation_record_fqdns = [for record in aws_route53_record.gyvm_xyz_validation : record.fqdn]
-  depends_on = [aws_acm_certificate.gyvm_xyz] 
+resource "aws_route53_record" "gyvm_validation" {
+  name    = tolist(aws_acm_certificate.gyvm.domain_validation_options)[0].resource_record_name
+  type    = tolist(aws_acm_certificate.gyvm.domain_validation_options)[0].resource_record_type
+  zone_id = aws_route53_zone.gyvm.zone_id
+  records = [tolist(aws_acm_certificate.gyvm.domain_validation_options)[0].resource_record_value]
+  ttl     = 60
 }
 
-resource "aws_acm_certificate_validation" "blog_cert_validation" {
-  certificate_arn         = aws_acm_certificate.blog_cert.arn
-  validation_record_fqdns = [tolist(aws_acm_certificate.blog_cert.domain_validation_options)[0].resource_record_name]
-  depends_on = [aws_acm_certificate.blog_cert] 
+resource "aws_route53_record" "blog_validation" {
+  name    = tolist(aws_acm_certificate.blog.domain_validation_options)[0].resource_record_name
+  type    = tolist(aws_acm_certificate.blog.domain_validation_options)[0].resource_record_type
+  zone_id = aws_route53_zone.gyvm.zone_id
+  records = [tolist(aws_acm_certificate.blog.domain_validation_options)[0].resource_record_value]
+  ttl     = 60
+}
+
+resource "aws_acm_certificate_validation" "gyvm" {
+  certificate_arn         = aws_acm_certificate.gyvm.arn
+  validation_record_fqdns = [aws_route53_record.gyvm_validation.fqdn]
+}
+
+resource "aws_acm_certificate_validation" "blog" {
+  certificate_arn         = aws_acm_certificate.blog.arn
+  validation_record_fqdns = [aws_route53_record.blog_validation.fqdn]
 }

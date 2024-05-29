@@ -49,9 +49,9 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = aws_acm_certificate.blog_cert.arn
+    acm_certificate_arn = aws_acm_certificate.blog.arn
     ssl_support_method = "sni-only"
   }
 
-  depends_on = [aws_acm_certificate_validation.blog_cert_validation]
+  depends_on = [aws_acm_certificate_validation.blog]
 }
