@@ -14,7 +14,7 @@ data "aws_cloudfront_cache_policy" "CachingDisabled" {
 }
 
 resource "aws_acm_certificate" "blog_cert" {
-  provider        = aws.us-east-1
+  provider        = aws.virginia
   domain_name       = "blog.gyvm.xyz"
   validation_method = "DNS"
 
