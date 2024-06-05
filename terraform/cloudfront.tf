@@ -2,6 +2,13 @@ locals {
   s3_origin_id = "zolaBlogPrd"
 }
 
+resource "aws_cloudfront_origin_access_control" "blog_zola_cf_oac" {
+  name                              = "blog-zola-cf-oac"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
 data "aws_cloudfront_cache_policy" "CachingDisabled" {
   name = "Managed-CachingDisabled"
 }
@@ -9,6 +16,7 @@ data "aws_cloudfront_cache_policy" "CachingDisabled" {
 resource "aws_cloudfront_distribution" "blog_zola_distribution" {
   origin {
     domain_name              = aws_s3_bucket.blog_zola_bucket.bucket_regional_domain_name
+    origin_access_control_id = aws_cloudfront_origin_access_control.blog_zola_cf_oac.id
     origin_id                = local.s3_origin_id
   }
 
@@ -25,6 +33,7 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
+    trusted_signers = ["self"]
   }
 
   price_class = "PriceClass_200"
