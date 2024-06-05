@@ -5,7 +5,7 @@ locals {
 resource "aws_cloudfront_origin_access_control" "blog_zola_cf_oac" {
   name                              = "blog-zola-cf-oac"
   origin_access_control_origin_type = "s3"
-  signing_behavior                  = "always"
+  signing_behavior                  = "no-override"
   signing_protocol                  = "sigv4"
 }
 
@@ -28,12 +28,11 @@ resource "aws_cloudfront_distribution" "blog_zola_distribution" {
 
   default_cache_behavior {
     cache_policy_id = data.aws_cloudfront_cache_policy.CachingDisabled.id
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy = "redirect-to-https"
     
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
     target_origin_id = local.s3_origin_id
-    trusted_signers = ["self"]
   }
 
   price_class = "PriceClass_200"
